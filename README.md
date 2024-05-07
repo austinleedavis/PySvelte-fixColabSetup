@@ -24,6 +24,34 @@ pip install git+https://github.com/austinleedavis/PySvelte-fixColabSetup
 
 (Or for developing PySvelte, you can `git clone git@github.com:austinleedavis/PySvelte-fixColabSetup.git`, `cd PySvelte`, `pip install -e . -U`. This will use your local development version when you `import pysvelte`.)
 
+Ensure NPM, nodejs and webpack are installed on the system. Run:
+```sh
+sudo apt update
+sudo apt install nodejs npm
+npm install --save-dev webpack webpack-cli
+```
+### Troubleshooting Install Issues
+If you receive an error while "Building pysvelte components with webpack", try the following:
+
+1. Verify you have Node.js, npm, and the webpack libraries:
+    ```sh
+    sudo apt update
+    sudo apt install nodejs npm
+    npm install --save-dev webpack webpack-cli
+    ```
+2. Manually build the svelte components by navigating to the svelte directory and running webpack:
+   ```sh
+   ~/miniconda3/envs/chess/lib/python3.11/site-packages/pysvelte/svelte`
+   npx webpack
+   ```
+#### Error: error:0308010C:digital envelope routines::unsupported
+The error, "Error: error:0308010C:digital envelope routines::unsupported", typically arises due to a compatibility issue between Node.js and certain cryptographic operations in versions 17 and later. This issue can be traced back to a change in the default cryptographic library used by Node.js. This issue can be circumvented using the following npm option:
+```sh
+export NODE_OPTIONS=--openssl-legacy-provider
+npx webpack
+```
+
+
 ## Colab
 
 See https://colab.research.google.com/drive/1nbYcUurTIQK4x8wsyd6o-N84a6TKVgyx?usp=sharing for a demo. The process will be simplified in the near future so that you don't need to download node and compile Svelte files unless you need to edit them!
